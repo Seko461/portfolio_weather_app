@@ -2,21 +2,30 @@ import React, { useEffect, useState } from 'react'
 
 const Main = () => {
 
-    const search = async () => {
+    const search = async (city) => {
         try {
-            const url = `https://api.openweathermap.org/data/2.5/weather?q={city name}&appid=${import.meta.env.apiKey}`
+            const apiKey = "ce8f7a737cba13ad56bf84757b8a8bb0"
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+
+            const res = await fetch(url);
+            const data = await res.json();
+            console.log(data);
         } catch (error) {
 
         }
+
+
     }
 
+    useEffect(() => {
+        search("London")
+    }, [])
     return (
         <div>
             <form action="" method="get">
                 <input
                     type="text"
-                    value={inputValue} onChange={handleInputChange}
-                    name='city'
+
                     placeholder='type a city'
                 />
                 <input type="submit" value="submit" />
